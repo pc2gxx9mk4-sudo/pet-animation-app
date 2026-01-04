@@ -10,7 +10,7 @@ st.write("Turn your pet into a movie star! Upload a photo below, and we will gen
 
 # 3. Embed the Tally Form
 # REPLACE THE URL BELOW with your specific Tally Embed URL
-tally_url = "https://tally.so/embed/YOUR_FORM_ID?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+tally_url = "https://tally.so/r/1AdJk4"
 
 # This creates the window for the form
 components.iframe(tally_url, height=800, scrolling=True)
