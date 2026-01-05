@@ -1,79 +1,60 @@
 import streamlit as st
 import streamlit.components.v1 as components
 
-# 1. Page Config
-st.set_page_config(page_title="Pet Animation Studio", page_icon="🐱", layout="centered")
+# 1. MUST BE THE FIRST COMMAND
+st.set_page_config(page_title="Pet Animation Studio", page_icon="🐱", layout="wide")
 
-# 2. FANCY CSS INJECTION
+# 2. FORCE CSS (Background & Fonts)
 st.markdown("""
 <style>
-    /* IMPORT GOOGLE FONT: 'Fredoka' (Cute & Rounded) */
+    /* Import Google Font */
     @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap');
 
-    /* ANIMATED BACKGROUND */
-    /* This defines the moving colors: Blue -> Pink -> Purple -> Blue */
+    /* BACKGROUND COLOR - Forces the whole page to be a gradient */
     .stApp {
-        background: linear-gradient(-45deg, #A8C0FF, #3f2b96, #FF8E53, #ff6b6b);
+        background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
         background-size: 400% 400%;
         animation: gradient 15s ease infinite;
     }
-    
+
+    /* Animation Keyframes */
     @keyframes gradient {
         0% { background-position: 0% 50%; }
         50% { background-position: 100% 50%; }
         100% { background-position: 0% 50%; }
     }
 
-    /* GLASSMORPHISM CARD FOR TITLE */
-    /* This creates the 'frosted glass' white box effect */
-    .glass-container {
-        background: rgba(255, 255, 255, 0.75);
-        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        border-radius: 20px;
-        border: 1px solid rgba(255, 255, 255, 0.18);
-        padding: 30px;
-        text-align: center;
-        margin-bottom: 30px;
-    }
-
-    /* TYPOGRAPHY STYLING */
+    /* TITLE STYLE */
     h1 {
         font-family: 'Fredoka', sans-serif;
-        color: #FF4B4B; /* Streamlit Red/Pink for title */
-        font-weight: 600;
-        font-size: 3rem;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-        margin: 0;
+        color: white;
+        text-shadow: 2px 2px 4px #000000;
+        text-align: center;
     }
     
+    /* TEXT STYLE */
     p {
         font-family: 'Fredoka', sans-serif;
-        color: #31333F;
+        color: white;
         font-size: 1.2rem;
-        margin-top: 10px;
+        text-align: center;
+        font-weight: bold;
+        text-shadow: 1px 1px 2px #000000;
     }
-    
-    /* Hide the default Streamlit top menu/footer for cleaner look */
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
-    
 </style>
 """, unsafe_allow_html=True)
 
-# 3. The "Hero" Section (Inside the Glass Container)
-# We use HTML here to wrap the title in our custom 'glass-container' class
-st.markdown("""
-<div class="glass-container">
-    <h1>🐱 Pet Animation Studio</h1>
-    <p>✨ Turn your furry friend into a movie star! ✨<br>
-    Upload a photo below to generate your custom animation.</p>
-</div>
-""", unsafe_allow_html=True)
+# 3. HEADER CONTENT
+st.title("🐱 Pet Animation Studio")
+st.write("Turn your pet into a movie star! Upload a photo below.")
 
-# 4. Embed the Tally Form
-tally_url = "https://tally.so/embed/1AdJk4"
+# 4. CENTER THE FORM
+# We use columns here. The form goes in the middle (col2).
+# col1 and col3 are empty space so you can see the background.
+col1, col2, col3 = st.columns([1, 2, 1]) 
 
-# Note: If possible, go to Tally settings and set the form background to 'Transparent'
-components.iframe(tally_url, height=800, scrolling=True)
+with col2:
+    # This box makes the form look like it's floating
+    st.markdown("### 📝 Fill out the form below:")
+    tally_url = "https://tally.so/embed/1AdJk4"
+    components.iframe(tally_url, height=800, scrolling=True)
